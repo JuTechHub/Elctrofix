@@ -1,1 +1,44 @@
-import { type NextRequest, NextResponse } from "next/server"import { registerUser } from "@/lib/auth"export async function POST(request: NextRequest) {  try {    const body = await request.json()    const { name, email, password, phone, address, city, role, experience, specializations, certifications } = body    // Validation    if (!name || !email || !password || !phone || !address || !city || !role) {      return NextResponse.json({ error: "Missing required fields" }, { status: 400 })    }    if (!["customer", "mechanic"].includes(role)) {      return NextResponse.json({ error: "Invalid role" }, { status: 400 })    }    // Use Firebase Auth for registration    const result = await registerUser({      name,      email,      password,      phone,      address,      city,      role,      experience,      specializations,      certifications    })    return NextResponse.json({      message: "Registration successful! Please check your email for verification.",      user: {        uid: result.user.uid,        email: result.user.email,        emailVerified: result.user.emailVerified      }    })  } catch (error: any) {    console.error("Registration error:", error)    return NextResponse.json({ error: error.message || "Registration failed" }, { status: 400 })  }}
+import { type NextRequest, NextResponse } from "next/server";
+import { registerUser } from "@/lib/auth";
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { name, email, password, phone, address, city, role, experience, specializations, certifications } = body;
+
+    // Validation
+    if (!name || !email || !password || !phone || !address || !city || !role) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    if (!["customer", "mechanic"].includes(role)) {
+      return NextResponse.json({ error: "Invalid role" }, { status: 400 });
+    }
+
+    // Use Firebase Auth for registration
+    const result = await registerUser({
+      name,
+      email,
+      password,
+      phone,
+      address,
+      city,
+      role,
+      experience,
+      specializations,
+      certifications
+    });
+
+    return NextResponse.json({
+      message: "Registration successful! Please check your email for verification.",
+      user: {
+        uid: result.user.uid,
+        email: result.user.email,
+        emailVerified: result.user.emailVerified
+      }
+    });
+  } catch (error: any) {
+    console.error("Registration error:", error);
+    return NextResponse.json({ error: error.message || "Registration failed" }, { status: 400 });
+  }
+}
