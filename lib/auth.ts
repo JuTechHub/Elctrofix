@@ -149,18 +149,6 @@ export async function updateUserProfile(
   }
 }
 
-export async function resendEmailVerification(): Promise<void> {
-  try {
-    if (auth.currentUser) {
-      await sendEmailVerification(auth.currentUser);
-    } else {
-      throw new Error("No user logged in");
-    }
-  } catch (error: any) {
-    throw new Error(error.message || "Failed to send verification email");
-  }
-}
-
 // Server-side function to get user from request
 // Note: This is a simplified implementation for development
 // In production, you should implement proper JWT verification

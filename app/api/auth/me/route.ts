@@ -2,6 +2,9 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getUserFromRequest } from "@/lib/auth"
 import { findUserById } from "@/lib/database"
 
+// Mark this route as dynamic to avoid static rendering issues
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const authUser = await getUserFromRequest(request)
@@ -10,14 +13,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const user = await findUserById(authUser.id)
+    const user = await findUserById(authUser.uid)
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 })
     }
 
     return NextResponse.json({
       user: {
-        id: user.id,
+        id: user.uid,
         name: user.name,
         email: user.email,
         role: user.role,

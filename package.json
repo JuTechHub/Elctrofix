@@ -1,14 +1,13 @@
 {
-  "name": "electrical-repair-platform",
-  "version": "1.0.0",
+  "name": "my-v0-project",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "dev": "node server.js",
     "dev:next": "next dev",
     "lint": "next lint",
-    "start": "next start",
-    "vercel-build": "next build"
+    "start": "next start"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

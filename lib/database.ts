@@ -6,6 +6,7 @@ import {
   getDocs,
   getDoc,
   updateDoc,
+  setDoc,
   query,
   where,
   orderBy,
@@ -14,6 +15,38 @@ import {
   type Timestamp,
 } from "firebase/firestore";
 import { db } from "./firebase";
+
+export async function createUser(userData: Partial<UserProfile>): Promise<UserProfile> {
+  try {
+    const userId = userData.uid!;
+    const userProfile: UserProfile = {
+      uid: userId,
+      name: userData.name || "",
+      email: userData.email || "",
+      role: userData.role || "customer",
+      phone: userData.phone || "",
+      address: userData.address || "",
+      city: userData.city || "",
+      emailVerified: userData.emailVerified || false,
+      createdAt: new Date().toISOString(),
+      ...(userData.role === "mechanic" && {
+        experience: userData.experience || "",
+        specializations: userData.specializations || "",
+        certifications: userData.certifications || "",
+        rating: userData.rating || 0,
+        completedJobs: userData.completedJobs || 0,
+        isVerified: userData.isVerified || false,
+        profileComplete: userData.profileComplete || false,
+      }),
+    };
+
+    await setDoc(doc(db, "users", userId), userProfile);
+    return userProfile;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw new Error("Failed to create user");
+  }
+}
 
 // Users database functions (using Firebase Firestore)
 export async function findUserByEmail(

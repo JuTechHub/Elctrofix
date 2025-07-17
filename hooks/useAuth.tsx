@@ -15,7 +15,6 @@ import {
   logoutUser,
   getUserProfile,
   createMissingProfile,
-  resendEmailVerification,
   type UserProfile,
 } from "@/lib/auth";
 import SocketService from "@/lib/socket";
@@ -28,7 +27,6 @@ interface AuthContextType {
   register: (userData: any) => Promise<void>;
   logout: () => Promise<void>;
   refreshProfile: () => Promise<void>;
-  resendVerification: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -72,10 +70,6 @@ export function AuthProvider({
     SocketService.getInstance().disconnect();
     await logoutUser();
     setProfile(null);
-  };
-
-  const resendVerification = async () => {
-    await resendEmailVerification();
   };
 
   useEffect(() => {
@@ -125,7 +119,6 @@ export function AuthProvider({
         register,
         logout,
         refreshProfile,
-        resendVerification,
       }}
     >
       {children}

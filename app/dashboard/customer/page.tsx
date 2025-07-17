@@ -25,7 +25,6 @@ import {
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
-import { EmailVerificationBanner } from "@/components/email-verification-banner";
 import { ChatWindow } from "@/components/chat/chat-window";
 import ChatComponent from "@/components/chat/chat-component";
 
@@ -404,11 +403,6 @@ service cloud.firestore {
             </div>
           </div>
         )}
-
-        {/* Email Verification Banner */}
-        <div className="mb-6">
-          <EmailVerificationBanner />
-        </div>
 
         {/* Welcome Section */}
         <div className="mb-8">

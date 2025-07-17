@@ -1,6 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { findUserByEmail } from "@/lib/database"
-import { verifyPassword, generateToken } from "@/lib/auth"
+import { loginUser } from "@/lib/auth"
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,47 +10,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 })
     }
 
-    // Find user
-    const user = await findUserByEmail(email)
-    if (!user) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 })
-    }
+    // Use Firebase Auth for login
+    const user = await loginUser(email, password)
 
-    // Verify password
-    const isValidPassword = await verifyPassword(password, user.password)
-    if (!isValidPassword) {
-      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 })
-    }
-
-    // Generate token
-    const token = await generateToken({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-    })
-
-    // Create response with cookie
-    const response = NextResponse.json({
+    return NextResponse.json({
       message: "Login successful",
       user: {
-        id: user.id,
-        name: user.name,
+        uid: user.uid,
         email: user.email,
-        role: user.role,
-      },
+        emailVerified: user.emailVerified
+      }
     })
 
-    response.cookies.set("auth-token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-    })
-
-    return response
-  } catch (error) {
+  } catch (error: any) {
     console.error("Login error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    return NextResponse.json({ error: error.message || "Invalid credentials" }, { status: 401 })
   }
 }
