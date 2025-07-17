@@ -1,21 +1,21 @@
-import { type NextRequest, NextResponse } from "next/server"
-import { getUserFromRequest } from "@/lib/auth"
-import { findUserById } from "@/lib/database"
+import { type NextRequest, NextResponse } from "next/server";
+import { getUserFromRequest } from "@/lib/auth";
+import { findUserById } from "@/lib/database";
 
 // Mark this route as dynamic to avoid static rendering issues
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const authUser = await getUserFromRequest(request)
+    const authUser = await getUserFromRequest(request);
 
     if (!authUser) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const user = await findUserById(authUser.uid)
+    const user = await findUserById(authUser.uid);
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 })
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -36,9 +36,12 @@ export async function GET(request: NextRequest) {
           isVerified: user.isVerified,
         }),
       },
-    })
+    });
   } catch (error) {
-    console.error("Get user error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    console.error("Get user error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }

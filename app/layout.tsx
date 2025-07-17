@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/hooks/useAuth";
-import AIElectricianPopup from "@/components/ai-electrician-popup";
+import { FloatingAIElectrician } from "@/components/floating-ai-electrician";
 import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,7 +27,7 @@ export default function RootLayout({
           <AuthProvider>
             <main className="flex-1">{children}</main>
             <Footer />
-            <AIElectricianPopup />
+            <FloatingAIElectrician />
           </AuthProvider>
         </div>
       </body>

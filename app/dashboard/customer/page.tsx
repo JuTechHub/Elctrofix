@@ -27,6 +27,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { ChatWindow } from "@/components/chat/chat-window";
 import ChatComponent from "@/components/chat/chat-component";
+import MobileMenu from "@/components/mobile-menu";
 
 interface ServiceRequest {
   id: string;
@@ -311,33 +312,47 @@ export default function CustomerDashboard() {
   }
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 min-h-screen">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-white shadow-sm border-b sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+          <div className="flex justify-between items-center py-3 md:py-4">
             <div className="flex items-center">
-              <Zap className="h-8 w-8 text-blue-600" />
-              <span className="ml-2 text-2xl font-bold text-gray-900">
+              <MobileMenu currentPage="dashboard" />
+              <Zap className="h-6 w-6 md:h-8 md:w-8 text-blue-600 ml-2 md:ml-0" />
+              <span className="ml-2 text-lg md:text-2xl font-bold text-gray-900">
                 ElectroFix
               </span>
             </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="icon">
-                <Bell className="h-5 w-5" />
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 md:h-10 md:w-10"
+              >
+                <Bell className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 md:h-10 md:w-10 hidden md:flex"
+              >
+                <User className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
-              <Button variant="ghost" size="icon" onClick={handleLogout}>
-                <LogOut className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleLogout}
+                className="h-8 w-8 md:h-10 md:w-10 hidden md:flex"
+              >
+                <LogOut className="h-4 w-4 md:h-5 md:w-5" />
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
         {/* Firestore Setup Notice */}
         {serviceRequests.length === 0 && !loadingServiceRequests && (
           <div className="mb-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">

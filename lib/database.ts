@@ -16,7 +16,9 @@ import {
 } from "firebase/firestore";
 import { db } from "./firebase";
 
-export async function createUser(userData: Partial<UserProfile>): Promise<UserProfile> {
+export async function createUser(
+  userData: Partial<UserProfile>
+): Promise<UserProfile> {
   try {
     const userId = userData.uid!;
     const userProfile: UserProfile = {

@@ -33,12 +33,14 @@ A comprehensive electrical repair platform connecting customers with verified el
 ## ⚙️ Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/electrical-repair-platform.git
    cd electrical-repair-platform
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    # or
@@ -48,11 +50,13 @@ A comprehensive electrical repair platform connecting customers with verified el
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Fill in your environment variables in `.env.local`:
+
    ```env
    # Gemini AI API Key
    GEMINI_API_KEY=your_gemini_api_key_here
@@ -68,6 +72,7 @@ A comprehensive electrical repair platform connecting customers with verified el
    ```
 
 4. **Run the development server**
+
    ```bash
    pnpm dev
    # or
@@ -84,6 +89,7 @@ A comprehensive electrical repair platform connecting customers with verified el
 ### Deploy to Vercel
 
 1. **Push to GitHub** (if not already done)
+
    ```bash
    git remote add origin https://github.com/your-username/electrical-repair-platform.git
    git push -u origin main
@@ -111,6 +117,7 @@ Make sure to add these environment variables in your Vercel dashboard:
 ## 📱 Usage
 
 ### For Customers
+
 1. Register/Login to your account
 2. Navigate to Customer Dashboard
 3. Click "Post New Problem" to submit an electrical issue
@@ -119,6 +126,7 @@ Make sure to add these environment variables in your Vercel dashboard:
 6. Access AI Electrician for immediate guidance
 
 ### For Electricians
+
 1. Register/Login with electrician account
 2. Navigate to Mechanic Dashboard
 3. View available service requests
@@ -166,6 +174,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Developer
 
 **Aman Kumar**
+
 - Email: [amanjee8055@gmail.com](mailto:amanjee8055@gmail.com)
 - LinkedIn: [aman-kumar-7a82432a4](https://www.linkedin.com/in/aman-kumar-7a82432a4)
 - GitHub: [JuTechHub](https://github.com/JuTechHub)
@@ -177,6 +186,7 @@ This platform provides electrical guidance for educational purposes. For complex
 ## 📞 Support
 
 For technical support or questions about the platform, please reach out through:
+
 - Email: amanjee8055@gmail.com
 - Emergency Line: 9905048916
 
