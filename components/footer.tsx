@@ -25,13 +25,13 @@ export default function Footer() {
                 Developed by
               </span>
               <a
-                href="https://github.com/JuTechHub"
+                href="https://github.com/BishnuOrao"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-1 text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium text-xs md:text-sm"
               >
                 <Github className="w-3 h-3 md:w-4 md:h-4" />
-                <span>Aman Kumar</span>
+                <span>Bishnu Oraon</span>
               </a>
             </div>
           </div>
