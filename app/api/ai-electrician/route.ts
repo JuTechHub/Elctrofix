@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
     const context = `You are an expert electrician AI assistant specializing in home electrical repairs and maintenance. You help customers with electrical problems, repairs, safety advice, and general electrical questions. 
 
